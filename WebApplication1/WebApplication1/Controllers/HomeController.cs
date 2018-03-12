@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Logic;
+﻿using BusinessLogic;
+using BusinessLogic.Logic;
+using BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,11 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private OrganisationLogic _organisationLogic;
-        public HomeController(OrganisationLogic logic)
+        private ILogicRepository<OrganisationModel> _organisationLogic;
+
+        public HomeController(ILogicRepository<OrganisationModel> logic)
         {
-            _organisationLogic = new OrganisationLogic();
+            _organisationLogic = logic;
         }
 
         public ActionResult Index()

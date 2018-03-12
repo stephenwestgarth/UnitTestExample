@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using BusinessLogic;
 using BusinessLogic.Logic;
 using BusinessLogic.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,12 +20,12 @@ namespace WebApplication1.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-          
-            var _OrganisationLogic = new Mock<OrganisationLogic>();
+
+            var _OrganisationLogic = new Mock<ILogicRepository<OrganisationModel>>();
 
             var testdata = new OrganisationModel { Id = 3, OrganisationName = "My Test Class Organisation" };
           
-            _OrganisationLogic.Setup(p => p.GetOrganisation()).Returns(testdata).Callback<OrganisationModel>(p=>p = testdata);
+            _OrganisationLogic.Setup(p => p.GetOrganisation()).Returns(testdata);
 
             HomeController controller = new HomeController(_OrganisationLogic.Object);
             ViewResult result = controller.Index() as ViewResult;
